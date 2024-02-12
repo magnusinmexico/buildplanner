@@ -1,0 +1,8 @@
+{
+    "python.analysis.extraPaths": [
+        "./buildplanner",
+        "./buildplanner/bp_cutter",
+        "./buildplanner/bp_utils",
+        "./buildplanner/bp_data_classes"
+    ]
+}

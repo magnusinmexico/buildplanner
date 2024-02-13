@@ -35,12 +35,9 @@ jobs:
       run: |
         pytest
 
-    - name: Print Run-Tests Result
-      run: echo "Run-Tests Result: ${{ needs.run-tests }}"
-  
   create-release:
     needs: run-tests
-    if: ${{ success(needs.run-tests) }}  # Run only if run-tests job succeeded
+    if: ${{ needs.run-tests.result == 'success' }}  # Run only if run-tests job succeeded
     runs-on: ubuntu-latest
 
     steps:

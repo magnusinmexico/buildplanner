@@ -37,7 +37,7 @@ jobs:
   
   create-release:
     needs: run-tests
-    if: ${{ needs.run-tests == 'success' }}  # Run only if run-tests job succeeded
+    if: ${{ needs.run-tests.result == 'success' }}  # Run only if run-tests job succeeded
     runs-on: ubuntu-latest
 
     steps:

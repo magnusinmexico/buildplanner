@@ -63,15 +63,15 @@ jobs:
         mkdir -p "${release_folder}/${release_source}"
         cp -r buildplanner/* "${release_folder}/${release_source}/"
         zip -r "${release_folder}.zip" "${release_folder}"
-        echo "::set-output name=release_folder::${release_folder}"
-        echo "::set-output name=release_zip::${release_folder}.zip"
+        echo "release_folder=${release_folder}" >> $GITHUB_ENV
+        echo "release_zip=${release_folder}.zip" >> $GITHUB_ENV
       shell: bash
-      
+
     - name: Upload Release Asset
       uses: actions/upload-release-asset@v1
       with:
         upload_url: ${{ github.event.repository.releases[0].upload_url }}
-        asset_path: ${{ steps.create_release.outputs.release_zip }}
-        asset_name: ${{ steps.create_release.outputs.release_folder }}
+        asset_path: ${{ env.release_zip }}
+        asset_name: ${{ env.release_folder }}
         asset_content_type: application/zip
       if: success()  # Upload asset only if create-release step succeeds

@@ -34,10 +34,10 @@ jobs:
     - name: Run pytest
       run: |
         pytest
-
+  
   create-release:
     needs: run-tests
-    if: ${{ needs.run-tests.result == 'success' }}  # Run only if run-tests job succeeded
+    if: ${{ success(needs.run-tests) }}  # Run only if run-tests job succeeded
     runs-on: ubuntu-latest
 
     steps:
@@ -54,8 +54,24 @@ jobs:
     - name: Install Dependencies
       run: pip install -r requirements.txt
 
-    - name: Run Release Script
+    - name: Create Release
+      id: create_release
       run: |
-        python create_release.py
-
-  
+        version=$(grep -oP '(?<="version": \()[0-9]+\,[0-9]+\,[0-9]+(?=\))' __init__.py)
+        release_folder="buildplanner_release_${version}"
+        release_source="buildplanner"
+        mkdir -p "${release_folder}/${release_source}"
+        cp -r buildplanner/* "${release_folder}/${release_source}/"
+        zip -r "${release_folder}.zip" "${release_folder}"
+        echo "::set-output name=release_folder::${release_folder}"
+        echo "::set-output name=release_zip::${release_folder}.zip"
+      shell: bash
+      
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1
+      with:
+        upload_url: ${{ github.event.repository.releases[0].upload_url }}
+        asset_path: ${{ steps.create_release.outputs.release_zip }}
+        asset_name: ${{ steps.create_release.outputs.release_folder }}
+        asset_content_type: application/zip
+      if: success()  # Upload asset only if create-release step succeeds

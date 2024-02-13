@@ -61,6 +61,7 @@ def create_release(addon_name,addon_folder, release_folder):
     shutil.rmtree(release_source)
     
     print(f"Release {version} created successfully!")
+    print(f"Release ZIP file stored in {str(os.path.join(release_path, f"{addon_name}.zip"))}.")
 
 
 def main():

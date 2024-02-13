@@ -68,7 +68,7 @@ jobs:
         zip -r "${release_folder}.zip" "${release_folder}"
         echo "release_folder=${release_folder}" >> $GITHUB_ENV
         echo "release_zip=${release_folder}.zip" >> $GITHUB_ENV
-        echo "upload_url:=${{ github.event.repository.releases[0].upload_url }}" >> $GITHUB_ENV
+        echo "upload_url=${{ github.event.repository.releases[0].upload_url }}" >> $GITHUB_ENV
       shell: bash
 
     - name: Upload Release Asset

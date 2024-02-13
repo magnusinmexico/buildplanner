@@ -1,4 +1,4 @@
-name: Build Planner CI
+name: Build Planner CD
 
 on:
   push:

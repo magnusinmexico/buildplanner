@@ -32,3 +32,26 @@ jobs:
     - name: Run pytest
       run: |
         pytest
+  
+  create-release:
+    needs: run-tests
+    if: ${{ success(needs.run-tests) }}  # Run only if run-tests job succeeded
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.12"  # Choose a specific Python version
+
+    - name: Install Dependencies
+      run: pip install -r requirements.txt
+
+    - name: Run Release Script
+      run: |
+        python create_release.py
+
+  

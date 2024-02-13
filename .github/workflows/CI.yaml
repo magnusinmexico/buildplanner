@@ -49,18 +49,18 @@ jobs:
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: "3.12"  # Choose a specific Python version
+    #- name: Set up Python
+    #  uses: actions/setup-python@v5
+    #  with:
+    #    python-version: "3.12"  # Choose a specific Python version
 
-    - name: Install Dependencies
-      run: pip install -r requirements.txt
+    #- name: Install Dependencies
+    #  run: pip install -r requirements.txt
 
     - name: Create Release
       id: create_release
       run: |
-        version=$(sed -n 's/.*version=\(.*\)/\1/p' buildplanner/__init__.py)
+        version=$(grep -oP '(?<="version": \()[0-9]+\,[0-9]+\,[0-9]+(?=\))' buildplanner/__init__.py)
         release_folder="buildplanner_release_${version}"
         release_source="buildplanner"
         mkdir -p "${release_folder}/${release_source}"

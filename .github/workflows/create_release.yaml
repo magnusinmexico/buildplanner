@@ -55,7 +55,7 @@ blender-addon-build:
       default: ''
     build-location:
       description: 'Path to directory, which will be zipped.'
-        default: './buildplanner/'
+      default: './buildplanner/'
       do-checkout:
         decsription: 'Should the action checkout the repository?'
         choices: [ 'true', 'false' ]

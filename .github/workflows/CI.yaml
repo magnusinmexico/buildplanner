@@ -36,7 +36,7 @@ jobs:
         pytest
 
     - name: Print Run-Tests Result
-      run: echo "Run-Tests Result: ${{ needs.run-tests.result }}"
+      run: echo "Run-Tests Result: ${{ run-tests.result }}"
   
   create-release:
     needs: run-tests

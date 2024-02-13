@@ -34,6 +34,9 @@ jobs:
     - name: Run pytest
       run: |
         pytest
+
+    - name: Print Run-Tests Result
+      run: echo "Run-Tests Result: ${{ needs.run-tests.result }}"
   
   create-release:
     needs: run-tests

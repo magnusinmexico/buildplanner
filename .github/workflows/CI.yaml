@@ -1,8 +1,7 @@
 name: Build Planner CI
 
 on:
-  push:
-  pull_request:
+  check_run:
 
 jobs:
   run-tests:

@@ -113,11 +113,11 @@ class TestBPCutter(unittest.TestCase):
         demand = BPDataStockPieces({4200:5,3600:2,1200:10,400:5,600:10,210:50,50:30})
         cut_width = 5.0
         s = ""
-        bp_oc = BPCutter(stock,demand,cut_width,length_unit="KILOMETERS",precision=1)
+        bp_oc = BPCutter(stock,demand,cut_width,length_unit="MILLIMETERS",original_length_unit="MILLIMETERS",precision=1)
         for step in bp_oc.cut_iter():
             pass
         s = str(step) # Only check last step
-        self.assertEqual(hashlib.md5(s.encode()).hexdigest(), "214bba9582c9fca44cb47bdfd0f1696e",s)
+        self.assertEqual(hashlib.md5(s.encode()).hexdigest(), "7e3abfead069c9beb1626139688d12ef",s)
 
 
 if __name__ == "__main__":

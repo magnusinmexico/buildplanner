@@ -37,22 +37,5 @@ jobs:
     - name: Run pytest
       run: |
         pytest
-  
-  create-release:
-    # needs: run-tests
-    # if: ${{ needs.run-tests.result == 'success' }}  # Run only if run-tests job succeeded
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Create Release
-
-      run: |
-        RELEASE_VERSION=$(grep -oP '(?<="version" : \()[0-9]+\,[0-9]+\,[0-9]+(?=\))' ./buildplanner/__init__.py)
-        echo $RELEASE_VERSION
 
 

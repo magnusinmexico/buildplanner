@@ -2,7 +2,11 @@ name: Build Planner CI
 
 on:
   push:
+    paths:
+      - '**.py'
   pull_request:
+    paths:
+      - '**.py'
 
 jobs:
   run-tests:

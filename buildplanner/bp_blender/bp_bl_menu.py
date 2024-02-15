@@ -29,7 +29,7 @@ class VIEW3D_PT_bp_cutter(bpy.types.Panel):  # class naming convention ‘CATEGO
 
     bl_category = "Build Planner"  # found in the Sidebar
     bl_label = "Cutter"  # found at the top of the Panel
-    bl_options = {'DEFAULT_CLOSED'}
+    #bl_options = {'DEFAULT_CLOSED'}
 
     def draw(self, context):
 

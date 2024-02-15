@@ -21,20 +21,18 @@ def create_release(addon_name,addon_folder, release_folder):
         print("Failed to retrieve addon version.")
         return
     
-    existing_release_path = os.path.join(release_folder, f"{addon_name}_release_{version}")
-    existing_zip_file = os.path.join(release_folder, f"{addon_name}_release_{version}.zip")
-    if os.path.exists(existing_release_path):
-        shutil.rmtree(existing_release_path)
-    if os.path.exists(existing_zip_file):
-        os.remove(existing_zip_file)
+    release_path = os.path.join(release_folder, f"{addon_name}_release_{version}")
+    zip_file = os.path.join(release_folder, f"{addon_name}_release_{version}", f"{addon_name}.zip")
+
+    if os.path.exists(release_path):
+        shutil.rmtree(release_path)
     
     # Create a folder for the release
-    release_path = os.path.join(release_folder, f"{addon_name}_release_{version}")
     os.makedirs(release_path, exist_ok=True)
 
-    release_source= os.path.join(release_path, f"{addon_name}")
+    release_source= os.path.join(release_folder, f"{addon_name}")
     os.makedirs(release_source, exist_ok=True)
-    
+
     # Copy addon files to the release folder
     for root, dirs, files in os.walk(addon_folder):
         # Ignore __pycache__ folders
@@ -45,14 +43,14 @@ def create_release(addon_name,addon_folder, release_folder):
         release_root = os.path.join(release_source, relative_root)
         os.makedirs(release_root, exist_ok=True)
         for file in files:
-            if file.endswith(('.py', '.png')):
+            if file.endswith(('.py', '.png', '.svg')):
                 file_path = os.path.join(root, file)
                 release_file_path = os.path.join(release_root, file)
                 shutil.copy(file_path, release_file_path)
     
     # Create a zip file for the release
     zip_file = zipfile.ZipFile(os.path.join(release_path, f"{addon_name}.zip"), 'w')
-    for folder_name, _, files in os.walk(release_path):
+    for folder_name, _, files in os.walk(release_source):
         for file in files:
             file_path = os.path.join(folder_name, file)
             zip_file.write(file_path, os.path.relpath(file_path, release_folder), compress_type=zipfile.ZIP_DEFLATED)

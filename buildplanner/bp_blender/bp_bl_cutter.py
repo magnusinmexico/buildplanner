@@ -333,6 +333,9 @@ class BuildPlanner_OT_bp_CutWood(bpy.types.Operator):
             bp["progress"][1] = f"Identifying lengths: {count}/{nwoods}"
             yield True
 
+        # Deselect all
+        bpy.ops.object.select_all(action='DESELECT')
+
         # Get a list of only dimensions
         dimensions = [(a, b, c) for ((a, _), (b, _), (c, _)) in wood_info]
 

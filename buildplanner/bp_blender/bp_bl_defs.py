@@ -28,7 +28,7 @@ from bpy.props import(
 from bpy.types import PropertyGroup
 
 class StringArrayItem(bpy.types.PropertyGroup):
-    value: bpy.props.StringProperty(name="String Value")
+    value: bpy.props.StringProperty(name="String Value") # type: ignore
 
 # ------------------------------------------------------------------------
 #    Scene Properties
@@ -36,26 +36,26 @@ class StringArrayItem(bpy.types.PropertyGroup):
 
 class BuildPlannerProperties(PropertyGroup):
 
-    bp_name: StringProperty(
+    bp_name: StringProperty( # type: ignore
         name="Starting with",
         description=":",
         default="",
         maxlen=64
         )
     
-    bp_stock_0: FloatProperty(name="",default=4.2,precision=5,unit="LENGTH")
-    bp_stock_1: FloatProperty(name="",default=3.6,precision=1,unit="LENGTH")
-    bp_stock_2: FloatProperty(name="",default=4.8,precision=1,unit="LENGTH")
-    bp_stock_3: FloatProperty(name="",default=3.0,precision=1,unit="LENGTH")
-    bp_stock_4: FloatProperty(name="",default=5.4,precision=1,unit="LENGTH")
+    bp_stock_0: FloatProperty(name="",default=4.2,precision=5,unit="LENGTH") # type: ignore
+    bp_stock_1: FloatProperty(name="",default=3.6,precision=1,unit="LENGTH") # type: ignore
+    bp_stock_2: FloatProperty(name="",default=4.8,precision=1,unit="LENGTH") # type: ignore
+    bp_stock_3: FloatProperty(name="",default=3.0,precision=1,unit="LENGTH") # type: ignore
+    bp_stock_4: FloatProperty(name="",default=5.4,precision=1,unit="LENGTH") # type: ignore
 
-    bp_stock_avail_0: IntProperty(name="",default=100)
-    bp_stock_avail_1: IntProperty(name="",default=100)
-    bp_stock_avail_2: IntProperty(name="",default=100)
-    bp_stock_avail_3: IntProperty(name="",default=100)
-    bp_stock_avail_4: IntProperty(name="",default=100)
+    bp_stock_avail_0: IntProperty(name="",default=100) # type: ignore
+    bp_stock_avail_1: IntProperty(name="",default=100) # type: ignore
+    bp_stock_avail_2: IntProperty(name="",default=100) # type: ignore
+    bp_stock_avail_3: IntProperty(name="",default=100) # type: ignore
+    bp_stock_avail_4: IntProperty(name="",default=100) # type: ignore
 
-    bp_stock_variations: IntProperty(
+    bp_stock_variations: IntProperty( # type: ignore
         name="Stock Varations",
         description=":",
         default=2,
@@ -63,7 +63,7 @@ class BuildPlannerProperties(PropertyGroup):
         max = 5
         )
     
-    bp_cut_width : FloatProperty(
+    bp_cut_width : FloatProperty( # type: ignore
         name="Cut width",
         default = 0.005,
         soft_min = 0.0,
@@ -72,7 +72,7 @@ class BuildPlannerProperties(PropertyGroup):
         unit="LENGTH"
     )
     
-    bp_cutter_file_path: StringProperty(
+    bp_cutter_file_path: StringProperty( # type: ignore
         name="Output folder",
         description="bp Cutter Output Folder",
         default="",

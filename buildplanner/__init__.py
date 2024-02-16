@@ -27,7 +27,7 @@ bl_info = {
     "author" : "Magnus Pettersson",
     "description" : "",
     "blender" : (4, 0, 0),
-    "version" : (0, 1, 1),
+    "version" : (0, 1, 2),
     "location" : "3D View > Sidebar",
     "warning" : "",
     "category" : "Construction",

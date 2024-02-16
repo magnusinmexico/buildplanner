@@ -69,6 +69,7 @@ class VIEW3D_PT_bp_cutter(bpy.types.Panel):  # class naming convention ‘CATEGO
         for i in range(context.scene.build_planner.bp_stock_variations):
             col1.label(text=f"{i+1}")
             col2.prop(context.scene.build_planner, "bp_stock_"+str(i))
+            col3.prop(context.scene.build_planner, "bp_stock_avail_"+str(i))
 
         row = self.layout.row()
         row.prop(context.scene.build_planner, "bp_cutter_file_path")

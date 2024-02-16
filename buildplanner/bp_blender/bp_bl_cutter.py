@@ -360,6 +360,7 @@ class BuildPlanner_OT_bp_CutWood(bpy.types.Operator):
         # Step four
         # Cut the wood
 
+        # Get the available stock lengths
         stock_inf = [
             context.scene.build_planner.bp_stock_0,
             context.scene.build_planner.bp_stock_1,
@@ -367,10 +368,22 @@ class BuildPlanner_OT_bp_CutWood(bpy.types.Operator):
             context.scene.build_planner.bp_stock_3,
             context.scene.build_planner.bp_stock_4
         ][:context.scene.build_planner.bp_stock_variations]
+
+        stock_inf = [round((num*unit_scale),precision) for num in stock_inf]
+
+        # Get the available stock amounts
+        stock_amount = [
+            context.scene.build_planner.bp_stock_avail_0,
+            context.scene.build_planner.bp_stock_avail_1,
+            context.scene.build_planner.bp_stock_avail_2,
+            context.scene.build_planner.bp_stock_avail_3,
+            context.scene.build_planner.bp_stock_avail_4
+        ][:context.scene.build_planner.bp_stock_variations]
         
         # Get cut_with and stock_inf, multiplied by unit_scale, rounded by precision
         cut_width = round(context.scene.build_planner.bp_cut_width * unit_scale, precision)
-        stock_inf = [round((num*unit_scale),precision) for num in stock_inf]
+        
+        stock_inf_amount = dict(zip(stock_inf,stock_amount))
 
         # Scale the demand to unit_scale
         if (unit_scale!=1.0):
@@ -380,9 +393,13 @@ class BuildPlanner_OT_bp_CutWood(bpy.types.Operator):
             demand = scaled_demand
 
         stock = BPDataStockPieces()
-        for length in stock_inf:
-            stock[length] = 1000
-
+        for length, amount in stock_inf_amount.items():
+            if length in stock:
+                stock[length] += amount 
+            else:
+                stock[length] = amount
+            
+  
         bp_cutter = BPCutter(stock,demand,cut_width,length_unit=length_unit, precision=precision)
 
         method = {"BOTH":BPCutter.METHOD.OPT,

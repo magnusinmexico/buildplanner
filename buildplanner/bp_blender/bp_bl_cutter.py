@@ -83,6 +83,10 @@ class BuildPlanner_OT_bp_CutWood(bpy.types.Operator):
                 key_mem.append(wood[i])
             yield (False, f"{count_1}/{number_of_wood} - {count_2}/{number_of_wood}", None)
 
+        # Sort lengths in ascening order, making sure if occurences are equal,
+        # the shortest are always selected
+        xyz = dict(sorted(xyz.items(), key=lambda x: float(x[0].split(":")[0])))
+
         # Find the two most common dimensions
         value_max_1 = 0
         value_max_2 = 0

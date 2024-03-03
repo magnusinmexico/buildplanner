@@ -40,7 +40,8 @@ class BuildPlanner_OT_bp_ShowHTML(bpy.types.Operator):
         html = bp["html"]
 
         html_file_path = context.scene.build_planner.bp_cutter_file_path
-        html_file_name = Path(html_file_path +"/build_planner_cutter.html")
+        html_file_name = str(Path(html_file_path +"/build_planner_cutter.html"))
+        self.report({"INFO"},"Creating: "+html_file_name)
         with open(html_file_name, 'w') as html_file:
             html_file.write(html)
         webbrowser.open(html_file_name)

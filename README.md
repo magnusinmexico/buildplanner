@@ -32,7 +32,7 @@ The addon automatically collects demand data from objects within your Blender sc
 
 ## Usage
 
-1. **Installation**: Install the addon by following the standard procedure for adding addons to Blender (Download [here](https://github.com/magnusinmexico/buildplanner/releases/download/v0.1.2/buildplanner.zip)).
+1. **Installation**: Install the addon by following the standard procedure for adding addons to Blender (Download [here](https://github.com/magnusinmexico/buildplanner/releases/download/v0.1.3/buildplanner.zip)).
 2. **Activation**: Activate the Build Planner Addon in Blender's preferences.
 3. **Access Cutter Tool**: Once activated, access the Cutter tool from the sidebar or toolbar within Blender.
 4. **Generate Stock List**: Use the Cutter tool to generate a list of required stock materials based on your project's demands.

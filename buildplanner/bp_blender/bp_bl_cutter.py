@@ -19,6 +19,7 @@
 
 import math
 import webbrowser
+from pathlib import Path
 
 import bpy
 import bmesh
@@ -39,7 +40,7 @@ class BuildPlanner_OT_bp_ShowHTML(bpy.types.Operator):
         html = bp["html"]
 
         html_file_path = context.scene.build_planner.bp_cutter_file_path
-        html_file_name = html_file_path +"\\cutter.html"
+        html_file_name = Path(html_file_path +"/build_planner_cutter.html")
         with open(html_file_name, 'w') as html_file:
             html_file.write(html)
         webbrowser.open(html_file_name)

@@ -1,0 +1,40 @@
+Hi, and welcome to this short Build Planner Cutter video tutorial!
+
+The Build Planner Cutter addresses the one-dimensional stock cutting problem, 
+which involves optimizing the cutting of pieces, 
+referred to as demand, from raw materials, known as the stock.
+
+I'll assume that you have some experience with Blender, 
+including knowledge of how to install a third-party addon. 
+Download links to the addon,
+as well as this Blender file,
+are provided in the description below.
+
+So, let's go to Blender!
+
+Once you have installed and enabled the addon,
+you'll locate it in the sidebar of the 3D view.
+
+Here, you can configure the following:
+
+- Name prefix for the object you want to include.
+- Width of the cut.
+- Number of available stock and their lengths.
+- Output folder, if you want to view the result as a printable HTML document.
+
+The units utilized by the cutter are consistent with those defined in the scene units settings.
+
+Now, it's time to initiate the cutting calculations. Simply press the "Cut Wood" button to proceed.
+
+Once the cutter has completed the cutting process, you can view the result in the Blender info panel. 
+
+Alternatively, if you specified an output path, you can access the cutter result in your web browser by clicking the "Open as HTML" button
+
+Thank you for joining me in this video tutorial! 
+I hope you found it informative, and that the Build Planner Cutter will prove to be a valuable tool for your projects. 
+Please don't hesitate to leave comments below, whether you found the Build Planner Cutter helpful, encountered any issues, 
+or have suggestions for improvement. 
+
+Until next time, happy building and designing!
+
+Thank you for watching!

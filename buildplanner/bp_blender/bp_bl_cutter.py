@@ -289,6 +289,33 @@ class BuildPlanner_OT_bp_CutWood(bpy.types.Operator):
         self.report({"INFO"},"Precision: "+str(precision))
 
         for i in range(5): bp["progress_step"][i] = 0
+
+        # Get the available stock lengths
+        stock_inf = [
+            context.scene.build_planner.bp_stock_0,
+            context.scene.build_planner.bp_stock_1,
+            context.scene.build_planner.bp_stock_2,
+            context.scene.build_planner.bp_stock_3,
+            context.scene.build_planner.bp_stock_4
+        ][:context.scene.build_planner.bp_stock_variations]
+
+        stock_inf = [round((num*unit_scale),precision) for num in stock_inf]
+
+        max_stock_length = max(stock_inf)
+
+        # Get the available stock amounts
+        stock_amount = [
+            context.scene.build_planner.bp_stock_avail_0,
+            context.scene.build_planner.bp_stock_avail_1,
+            context.scene.build_planner.bp_stock_avail_2,
+            context.scene.build_planner.bp_stock_avail_3,
+            context.scene.build_planner.bp_stock_avail_4
+        ][:context.scene.build_planner.bp_stock_variations]
+        
+        # Get cut_with and stock_inf, multiplied by unit_scale, rounded by precision
+        cut_width = round(context.scene.build_planner.bp_cut_width * unit_scale, precision)
+        
+        stock_inf_amount = dict(zip(stock_inf,stock_amount))
     
         #
         # Step one 
@@ -343,7 +370,12 @@ class BuildPlanner_OT_bp_CutWood(bpy.types.Operator):
         bpy.ops.object.select_all(action='DESELECT')
 
         # Get a list of only dimensions
-        dimensions = [(a, b, c) for ((a, _), (b, _), (c, _)) in wood_info]
+        dimensions = [(x, y, z) for ((x, _), (y, _), (z, _)) in wood_info]
+
+        # Check if any object is longer than max stock and show warning
+        for i in range(len(woods)):
+            if max(dimensions[i]) > max_stock_length:
+                self.report({"WARNING"},f"{woods[i].name} with length ({str(max(dimensions[i]))}) is exceeding maximum stock length {max_stock_length}!")
 
         # Set step 2 to done (2)
         bp["progress_step"][1] = 2
@@ -368,31 +400,6 @@ class BuildPlanner_OT_bp_CutWood(bpy.types.Operator):
         #
         # Step four
         # Cut the wood
-
-        # Get the available stock lengths
-        stock_inf = [
-            context.scene.build_planner.bp_stock_0,
-            context.scene.build_planner.bp_stock_1,
-            context.scene.build_planner.bp_stock_2,
-            context.scene.build_planner.bp_stock_3,
-            context.scene.build_planner.bp_stock_4
-        ][:context.scene.build_planner.bp_stock_variations]
-
-        stock_inf = [round((num*unit_scale),precision) for num in stock_inf]
-
-        # Get the available stock amounts
-        stock_amount = [
-            context.scene.build_planner.bp_stock_avail_0,
-            context.scene.build_planner.bp_stock_avail_1,
-            context.scene.build_planner.bp_stock_avail_2,
-            context.scene.build_planner.bp_stock_avail_3,
-            context.scene.build_planner.bp_stock_avail_4
-        ][:context.scene.build_planner.bp_stock_variations]
-        
-        # Get cut_with and stock_inf, multiplied by unit_scale, rounded by precision
-        cut_width = round(context.scene.build_planner.bp_cut_width * unit_scale, precision)
-        
-        stock_inf_amount = dict(zip(stock_inf,stock_amount))
 
         # Scale the demand to unit_scale
         if (unit_scale!=1.0):

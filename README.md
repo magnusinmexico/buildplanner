@@ -7,6 +7,10 @@
 [![GitHub](https://img.shields.io/github/license/magnusinmexico/buildplanner)](https://github.com/magnusinmexico/buildplanner/blob/main/LICENSE)
 ![](https://visitor-badge.laobi.icu/badge?page_id=magnusinmexico/buildplanner)
 
+
+[![YouTube Tutorial](https://img.shields.io/badge/YouTube-Tutorial-red?style=for-the-badge&logo=youtube)](https://www.youtube.com/watch?v=z-RzOBaauGg)
+
+
 The **Build Planner Addon for Blender** is a powerful tool designed to streamline the build planning process within Blender. Whether you're working on architectural projects, furniture designs, or DIY home improvements, this addon provides essential features to optimize your workflow.
 
 ## Purpose
